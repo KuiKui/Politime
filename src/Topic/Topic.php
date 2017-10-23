@@ -19,14 +19,14 @@ class Topic
      */
     public $visible;
 
-    public function __construct(int $id, string $name, bool $visible = true)
+    public function __construct($id, $name, $visible = true)
     {
         $this->id = $id;
         $this->name = $name;
         $this->visible = $visible;
     }
 
-    public function expose() : array
+    public function expose()
     {
         return [
             'id' => $this->id,

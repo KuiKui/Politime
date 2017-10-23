@@ -29,7 +29,7 @@ class TopicService
         }
     }
 
-    public function list($all = false) : array
+    public function getList($all = false)
     {
         if ($all) {
             return $this->topics;
@@ -46,11 +46,11 @@ class TopicService
         return $returnedSubjects;
     }
 
-    public function searchByName(array $names) : array
+    public function searchByName(array $names)
     {
         $found = [];
 
-        foreach ($this->list() as $topic) {
+        foreach ($this->getList() as $topic) {
             if (in_array($topic->name, $names)) {
                 $found[] = $topic;
             }

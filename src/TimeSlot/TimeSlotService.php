@@ -16,7 +16,7 @@ class TimeSlotService
      */
     public $url;
 
-    public function __construct(string $url)
+    public function __construct($url)
     {
         $this->url = $url;
 
@@ -30,7 +30,7 @@ class TimeSlotService
             return null;
         }
 
-        $timeSlotsData = json_decode($timeSlotsData, true) ?? [];
+        $timeSlotsData = json_decode($timeSlotsData, true) ?: [];
 
         $this->timeSlots = [];
         foreach ($timeSlotsData as $day => $topicsData) {
@@ -43,7 +43,7 @@ class TimeSlotService
         }
     }
 
-    public function list() : array
+    public function getList()
     {
         $listed = [];
 
@@ -62,7 +62,7 @@ class TimeSlotService
         return $listed;
     }
 
-    public function save(string $day, array $topics) : bool
+    public function save($day, array $topics)
     {
         $toSave = [];
 

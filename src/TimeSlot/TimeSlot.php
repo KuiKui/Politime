@@ -16,13 +16,13 @@ class TimeSlot
      */
     public $topics;
 
-    public function __construct(string $day, array $topics)
+    public function __construct($day, array $topics)
     {
         $this->day = $day;
         $this->topics = $topics;
     }
 
-    public function expose() : array
+    public function expose()
     {
         return [
             'day' => $this->day,

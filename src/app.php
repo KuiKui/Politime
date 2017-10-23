@@ -2,18 +2,14 @@
 
 require_once __DIR__.'/../vendor/autoload.php';
 
-use Symfony\Component\Console\{
-    Output\OutputInterface,
-    Input\InputInterface,
-    Style\SymfonyStyle,
-    Question\ChoiceQuestion
-};
-use Politime\{
-    Topic\Topic,
-    Topic\TopicService,
-    TimeSlot\TimeSlot,
-    TimeSlot\TimeSlotService
-};
+use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\Console\Question\ChoiceQuestion;
+use Politime\Topic\Topic;
+use Politime\Topic\TopicService;
+use Politime\TimeSlot\TimeSlot;
+use Politime\TimeSlot\TimeSlotService;
 
 /*******************************************************************************
  * Micro-commande permettant de saisir les sujets abordés chaque jour de travail
@@ -66,8 +62,8 @@ $app->command('politime [subcommand] [param]', function ($subcommand, $param = '
     $io = new SymfonyStyle($input, $output);
 
     // Chargement des services
-    $topicService = new TopicService($_ENV['POLITIME_TOPICS_FILENAME'] ?? DEFAULT_TOPICS_FILENAME);
-    $timeSlotService = new TimeSlotService($_ENV['POLITIME_TIMESLOTS_FILENAME'] ?? DEFAULT_TIMESLOTS_FILENAME);
+    $topicService = new TopicService($_ENV['POLITIME_TOPICS_FILENAME'] ?: DEFAULT_TOPICS_FILENAME);
+    $timeSlotService = new TimeSlotService($_ENV['POLITIME_TIMESLOTS_FILENAME'] ?: DEFAULT_TIMESLOTS_FILENAME);
 
     // Définition des commandes
     switch ($subcommand) {
@@ -76,12 +72,12 @@ $app->command('politime [subcommand] [param]', function ($subcommand, $param = '
                 case 'topics':
                     $io->table(['Id', 'Name'], array_map(function (Topic $topic) {
                         return [$topic->id, $topic->name];
-                    }, $topicService->list()));
+                    }, $topicService->getList()));
 
                     break;
 
                 case 'timeslots':
-                    $io->table(['Date', 'Topics'], $timeSlotService->list());
+                    $io->table(['Date', 'Topics'], $timeSlotService->getList());
 
                     break;
 
@@ -104,7 +100,7 @@ $app->command('politime [subcommand] [param]', function ($subcommand, $param = '
             }
 
             // Sélection des sujets par l'utilisateur
-            $selectedTopicNames = selectTopics($date, $topicService->list(), $io);
+            $selectedTopicNames = selectTopics($date, $topicService->getList(), $io);
             $selectedTopics = $topicService->searchByName($selectedTopicNames);
 
             // Affichage du récapitulatif du choix de l'utilisateur
@@ -134,7 +130,7 @@ $app->command('politime [subcommand] [param]', function ($subcommand, $param = '
 
 $app->run();
 
-function selectTopics(string $date, array $topics, SymfonyStyle $io) : array
+function selectTopics($date, array $topics, SymfonyStyle $io)
 {
     // Récupération du nom de tous les topics
     $choices = array_map(function (Topic $topic) {
