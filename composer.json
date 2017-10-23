@@ -1,0 +1,13 @@
+{
+    "require": {
+        "mnapoli/silly": "^1.5"
+    },
+    "require-dev": {
+        "symfony/var-dumper": "^3.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Politime\\": "src/"
+        }
+    }
+}
