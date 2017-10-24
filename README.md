@@ -36,7 +36,7 @@ politime list timeslots
 
 ## Requirement
 
-- PHP
+- PHP 5.4 (accessibility over security)
 
 ## Install
 
