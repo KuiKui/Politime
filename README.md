@@ -13,30 +13,37 @@ Command line tasks logger, to make your boss happy.
 List topics :
 
 ```
-politime list topics
+$ politime list topics
 ```
 
-Add topics on which you worked today :
+Add topics on which you worked :
 
 ```
-politime add
+# Today
+$ politime add
+
+# Yesterday
+$ politime add yesterday
+
+# Another specific day
+$ politime add 2017-10-23
 ```
 
 Add topics for another day :
 
 ```
-politime add 2017-10-27
+$ politime add 2017-10-27
 ```
 
 List saved topics by days :
 
 ```
-politime list timeslots
+$ politime list timeslots
 ```
 
 ## Requirement
 
-- PHP 5.4 (accessibility over security)
+- PHP 5.5 (accessibility over security)
 
 ## Install
 
@@ -56,33 +63,12 @@ $ composer install
 The executable is in the `bin/` directory, you can configure your `$PATH` :
 
 ```
-export PATH=/path-to-politime/bin:$PATH
+$ export PATH=/path-to-politime/bin:$PATH
 ```
 
 ## Configure topics
 
-You can create a `topics.json` file in the `data` directory containing a list of topics :
-
-```json
-[
-  {
-    "id":1,
-    "name":"Bug",
-    "visible":true
-  },
-  {
-    "id":2,
-    "name":"Infra",
-    "visible":true
-  },
-  {
-    "id":3,
-    "name":"Évolutions techniques",
-    "visible":true
-  },
-  ...
-]
-```
+Create a `topics.json` file in the `data` directory containing a list of topics (see the [example](data/topics-example.json)).
 
 You can also configure an environment variable to specify a custom path to your topics file :
 
