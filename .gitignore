@@ -4,3 +4,4 @@ vendor/
 Vagrantfile.local
 data/*
 !data/.gitkeep
+!data/topics-example.json

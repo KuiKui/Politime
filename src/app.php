@@ -53,7 +53,7 @@ use Politime\TimeSlot\TimeSlotService;
  * spécifiant son nom (ex: //srv-cra/politime/michael-jordan.json).
  */
 
-define('DEFAULT_TOPICS_FILENAME', __DIR__.'/../data/topics.json');
+define('DEFAULT_TOPICS_FILENAME', __DIR__ . '/../data/topics-example.json');
 define('DEFAULT_TIMESLOTS_FILENAME', __DIR__.'/../data/timeslots.json');
 
 $app = new Silly\Application();
@@ -62,8 +62,8 @@ $app->command('politime [subcommand] [param]', function ($subcommand, $param = '
     $io = new SymfonyStyle($input, $output);
 
     // Chargement des services
-    $topicService = new TopicService($_ENV['POLITIME_TOPICS_FILENAME'] ?: DEFAULT_TOPICS_FILENAME);
-    $timeSlotService = new TimeSlotService($_ENV['POLITIME_TIMESLOTS_FILENAME'] ?: DEFAULT_TIMESLOTS_FILENAME);
+    $topicService = new TopicService(getenv('POLITIME_TOPICS_FILENAME') ?: DEFAULT_TOPICS_FILENAME);
+    $timeSlotService = new TimeSlotService(getenv('POLITIME_TIMESLOTS_FILENAME') ?: DEFAULT_TIMESLOTS_FILENAME);
 
     // Définition des commandes
     switch ($subcommand) {

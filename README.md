@@ -86,6 +86,12 @@ You can create a `topics.json` file in the `data` directory containing a list of
 
 You can also configure an environment variable to specify a custom path to your topics file :
 
-```shell
-export POLITIME_TOPICS_FILENAME=/path-to-your-custom-data/my-custom-topics.json
+```
+$ export POLITIME_TOPICS_FILENAME=/path-to-your-custom-data/my-custom-topics.json
+```
+
+It's possible to reach remote file to use centralized topics in a same team :
+
+```
+$ export POLITIME_TOPICS_FILENAME=http://path-to-your-custom-remote-data/team-remote-topics.json
 ```

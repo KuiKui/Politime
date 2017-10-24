@@ -1,0 +1,17 @@
+[
+  {
+    "id":1,
+    "name":"Bug",
+    "visible":true
+  },
+  {
+    "id":2,
+    "name":"Feature 1",
+    "visible":true
+  },
+  {
+    "id":3,
+    "name":"Feature 2",
+    "visible":true
+  }
+]

@@ -11,10 +11,6 @@ class TopicService
 
     public function __construct($url)
     {
-        if (!file_exists($url)) {
-            return null;
-        }
-
         $topicsData = file_get_contents($url);
 
         if ($topicsData === false) {
