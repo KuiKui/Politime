@@ -83,7 +83,7 @@ It's possible to reach remote file to use centralized topics in a same team :
 $ export POLITIME_TOPICS_FILENAME=http://path-to-your-custom-remote-data/team-remote-topics.json
 ```
 
-## Configure timeslots
+## Configure backups
 
 By default, Politime save your activity in a json file `timeslots.json` in the `data` directory.
 
