@@ -69,7 +69,7 @@ $ export PATH=/path-to-politime/bin:$PATH
 
 ## Configure topics
 
-Create a `topics.json` file in the `data` directory containing a list of topics (see the [example](data/topics-example.json)).
+Update the `topics.json` file in the `data` directory containing a list of topics (see the [it](data/topics-example.json)).
 
 You can also configure an environment variable to specify a custom path to your topics file :
 
