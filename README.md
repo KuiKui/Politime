@@ -29,6 +29,13 @@ $ politime add yesterday
 $ politime add 2017-10-23
 ```
 
+To overwrite previously saved topics, use `set` command instead of `add` :
+
+```
+# Today
+$politime set
+```
+
 List saved topics by days :
 
 ```shell
