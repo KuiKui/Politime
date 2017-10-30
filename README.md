@@ -8,7 +8,7 @@ Command line tasks logger, to make your boss happy.
 - The user select one or more topics on which he worked today.
 - Its results are saved in a json file and it can be exposed later, in the proper format.
 
-# Usage
+## Usage
 
 List predefined topics :
 
