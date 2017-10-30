@@ -10,7 +10,7 @@ Command line tasks logger, to make your boss happy.
 
 # Usage
 
-List topics :
+List predefined topics :
 
 ```shell
 $ politime list topics
@@ -32,7 +32,7 @@ $ politime add 2017-10-23
 List saved topics by days :
 
 ```shell
-$ politime list timeslots
+$ politime list
 ```
 
 ## Requirement
