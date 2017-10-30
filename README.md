@@ -31,7 +31,7 @@ $ politime add 2017-10-23
 
 To overwrite previously saved topics for a day, use `set` command instead of `add` :
 
-```
+```shell
 # Today
 $ politime set
 ```
