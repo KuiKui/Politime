@@ -62,7 +62,7 @@ class TimeSlotService
         return $listed;
     }
 
-    public function save($day, array $topics)
+    public function save($day, array $topics, $overwrite = false)
     {
         $toSave = [];
 
@@ -73,10 +73,22 @@ class TimeSlotService
             }, $timeSlot->topics);
         }
 
-        // Ajout (avec écrasement) du nouveau time slot
-        $toSave[$day] = array_map(function (Topic $topic) {
+        $selectedTopics = array_map(function (Topic $topic) {
             return $topic->expose();
         }, $topics);
+
+        if (!isset($toSave[$day])) {
+            $toSave[$day] = [];
+        }
+
+        // Ajout du nouveau time slot...
+        if ($overwrite) {
+            // ...avec écrasements...
+            $toSave[$day] = $selectedTopics;
+        } else {
+            // ...ou sans (avec dédoublonnage).
+            $toSave[$day] = array_values(array_unique(array_merge($toSave[$day], $selectedTopics), SORT_REGULAR));
+        }
 
         // Sauvegarde
         if (file_put_contents($this->url, json_encode($toSave)) === false) {

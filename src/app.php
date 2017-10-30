@@ -76,18 +76,14 @@ $app->command('politime [subcommand] [param]', function ($subcommand, $param = '
 
                     break;
 
-                case 'timeslots':
-                    $io->table(['Date', 'Topics'], $timeSlotService->getList());
-
-                    break;
-
                 default:
-                    $output->writeln('Unknown command');
+                    $io->table(['Date', 'Topics'], $timeSlotService->getList());
 
                     break;
             }
             break;
 
+        case 'set':
         case 'add':
             // Traitement de la date en paramètre
             try {
@@ -109,12 +105,14 @@ $app->command('politime [subcommand] [param]', function ($subcommand, $param = '
             }, $selectedTopics));
 
             // Demande de confirmation avant d'enregistrer
-            if (!$io->confirm('Are you sure?', false)) {
+            if (!$io->confirm('Are you sure?')) {
                 break;
             }
 
+            $overwrite = ($subcommand == 'set');
+
             // Enregistrement du timeSlot
-            if (!$timeSlotService->save($date, $selectedTopics)) {
+            if (!$timeSlotService->save($date, $selectedTopics, $overwrite)) {
                 $io->warning('Time slot not saved.');
             }
             $io->success('Time slot saved.');
