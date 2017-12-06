@@ -61,12 +61,24 @@ $app = new Silly\Application();
 $app->command('politime [subcommand] [param]', function ($subcommand, $param = '', InputInterface $input, OutputInterface $output) {
     $io = new SymfonyStyle($input, $output);
 
+    // Récupération des chemins des fichiers
+    $topicsFilename = getenv('POLITIME_TOPICS_FILENAME') ?: DEFAULT_TOPICS_FILENAME;
+    $timeslotsFilename = getenv('POLITIME_TIMESLOTS_FILENAME') ?: DEFAULT_TIMESLOTS_FILENAME;
+
     // Chargement des services
-    $topicService = new TopicService(getenv('POLITIME_TOPICS_FILENAME') ?: DEFAULT_TOPICS_FILENAME);
-    $timeSlotService = new TimeSlotService(getenv('POLITIME_TIMESLOTS_FILENAME') ?: DEFAULT_TIMESLOTS_FILENAME);
+    $topicService = new TopicService($topicsFilename);
+    $timeSlotService = new TimeSlotService($timeslotsFilename);
 
     // Définition des commandes
     switch ($subcommand) {
+        case 'config':
+            $io->table(['Type', 'File'],[
+                ['Politime', __FILE__],
+                ['Topics', $topicsFilename],
+                ['Timeslots', $timeslotsFilename]
+            ]);
+            break;
+
         case 'list':
             switch ($param) {
                 case 'topics':
